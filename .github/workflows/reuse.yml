@@ -1,0 +1,19 @@
+name: reusable Workflow
+on:
+  push:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+jobs:
+  job1:
+    uses: CanarysPlayground/Actions-demo/.github/workflows/dependent.yml@main
+
+  job2:
+    runs-on: ubuntu-latest
+    needs: job1
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Run build
+        run: echo "Building the project..."
